@@ -1,37 +1,28 @@
 /*
  * Matt Jankowski
- * AI (CS 411) Hw 4
- * 15 puzzle BFS - BFS Class
+ * AI (CS 411) Hw 5
+ * 15 puzzle IDDFS - DLS Class
  * To God be the Glory
  */
 
 import java.util.ArrayList;
 import java.util.Arrays;
 
-
+//DLS => "Depth Limit Search"
 public class DLS {
 
-    private int goal[] = new int[]{
-            1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 0};
-            //5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 0, 5, 5, 5, 5};
+    private int goal[] = new int[]{1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 0};
     private ArrayList<Node> frontier = new ArrayList<>();  //gray nodes
-    private ArrayList<Node> explored = new ArrayList<>();  //black nodes
-    private long starting_time;
     public static int nodeCount = 0; //total number of nodes created in this DLS run
 
-
-
-
-
+    //DLS -> Creates a node and calls DLS_visit()
     public DLS(int[] initial_board, int limit) {
         Node root = new Node(initial_board, null, '#');   //create root (direction = '#')
-        if (matchesGoal(root)) {
-            success(root);
-            return; //if found, succeed, & end game
-        }
         DLS_visit(root, limit);
     }
 
+    //DLS_visit -> recursive function that "deepens" into the search tree:
+    //Adds into frontier, checks for goal, and if not at limit, generates children which recurse
     public void DLS_visit(Node u, int limit) {
         frontier.add(u);
         //Functions.printNodeList(">frontier", frontier);
@@ -40,19 +31,19 @@ public class DLS {
             success(u);
             System.exit(0); //if found, succeed, & end game
         }
-        if(u.getDepth() < limit) {
+        if (u.getDepth() < limit) {
             for (Node v : generateChildren(u)) {
-                System.out.println("LIMIT: " + limit);
-                if (!inExplored(v) && !inFrontier(v)) {  //white (prevents going back to the same node)
-                    DLS_visit(v, limit);
+                if (!inFrontier(v)) {       //prevents going back to the same node
+                    DLS_visit(v, limit);    //run recursive DLS on children nodes
                 }
             }
         }
     }
 
-    //generate all children of the parent
-    //2 min -> if blank is in corner    3 -> if blank is on side    4 max -> if blank within
-    //TRANSITION FUNCTION
+    /* TRANSITION FUNCTION (Same as in BFS)
+     * generate all children of the parent
+     * blank is in corner -> 2 children    blank is on side -> 3 children   blank within -> 4 children
+     */
     public ArrayList<Node> generateChildren(Node parent) {
         Node U = parent.moveUp();
         Node D = parent.moveDown();
@@ -69,9 +60,6 @@ public class DLS {
         return children;
     }
 
-
-
-
     //print success messages
     public void success(Node solutionNode) {
         printMoves(solutionNode);
@@ -83,14 +71,6 @@ public class DLS {
     //return true if node is in frontier list (by comparing int[])
     public boolean inFrontier(Node node) {
         for (Node n : frontier) {
-            if (Arrays.equals(n.getBoard(), node.getBoard())) return true;
-        }
-        return false;
-    }
-
-    //return true if node is in explored list (by comparing int[])
-    public boolean inExplored(Node node) {
-        for (Node n : explored) {
             if (Arrays.equals(n.getBoard(), node.getBoard())) return true;
         }
         return false;
@@ -119,7 +99,7 @@ public class DLS {
     //calculate and print the time taken to run program
     public void printTime() {
         long ending_time = System.currentTimeMillis(); //record time at end of run
-        float total_seconds = (float) (ending_time - starting_time) / 1000; //get difference between start and end.
+        float total_seconds = (float) (ending_time - Main.startingTime) / 1000; //get difference between start and end.
         System.out.println("Time Taken: " + total_seconds + " s"); //print result
     }
 
@@ -132,7 +112,4 @@ public class DLS {
         System.out.println("Memory Used: " + memory / 1024L + " kB");
     }
 
-
 }
-
-

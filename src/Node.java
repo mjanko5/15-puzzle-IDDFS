@@ -1,7 +1,7 @@
 /*
  * Matt Jankowski
- * AI (CS 411) Hw 4
- * 15 puzzle BFS - Node Class
+ * AI (CS 411) Hw 5
+ * 15 puzzle IDDFS - Node Class
  * To God be the Glory
  */
 
@@ -27,13 +27,14 @@ public class Node {
         nodeID = DLS.nodeCount++;
 
         //Uncomment for debugging:
-
+/*
         try {
             System.out.println("Creating a new node.\t\t" + direction + "\t\t" + depth + "\t\t" + nodeID + "\t\t" + parent.nodeID);
         } catch (NullPointerException e) {
             System.out.println("Creating a new node.\t\t" + direction + "\t\t" + depth + "\t\t" + nodeID + "\t\tNIL");
         }
         printBoard();
+ */
 
     }
 

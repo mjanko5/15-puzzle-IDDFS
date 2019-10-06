@@ -1,7 +1,7 @@
 /*
  * Matt Jankowski
- * AI (CS 411) Hw 4
- * 15 puzzle BFS - Common Functions Class
+ * AI (CS 411) Hw 5
+ * 15 puzzle IDDFS - Functions Class
  * To God be the Glory
  */
 
@@ -32,7 +32,7 @@ public class Functions {
         }
     }
 
-    public static void printNodeList(String name, ArrayList<Node> arraylist){
+    public static void printNodeList(String name, ArrayList<Node> arraylist) {
         System.out.print(name + " = [ ");
         for (Node node : arraylist) {
             System.out.print(node.getNodeID() + " ");
