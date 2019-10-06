@@ -40,9 +40,9 @@ public class DLS {
         }
     }
 
-    /* TRANSITION FUNCTION (Same as in BFS)
-     * generate all children of the parent
-     * blank is in corner -> 2 children    blank is on side -> 3 children   blank within -> 4 children
+    /* TRANSITION FUNCTION (Same as in BFS).
+     * generate all children of the parent.
+     * blank is in corner -> 2 children    blank is on side -> 3 children   blank within -> 4 children.
      */
     public ArrayList<Node> generateChildren(Node parent) {
         Node U = parent.moveUp();
