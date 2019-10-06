@@ -8,20 +8,46 @@
 import java.util.ArrayList;
 import java.util.Arrays;
 
-public class IDDFS{
+
+public class DLS {
 
     private int goal[] = new int[]{
             1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 0};
+            //5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 0, 5, 5, 5, 5};
+    private ArrayList<Node> frontier = new ArrayList<>();  //gray nodes
+    private ArrayList<Node> explored = new ArrayList<>();  //black nodes
     private long starting_time;
-    private double infinity = Double.POSITIVE_INFINITY;
-    public static int nodeCount = 0; //total number of nodes created
+    public static int nodeCount = 0; //total number of nodes created in this DLS run
 
 
-    public IDDFS(int[] initial_board) {
-        for (int limit = 0; limit < infinity; limit++){
-            new DLS(initial_board, limit);
+
+
+
+    public DLS(int[] initial_board, int limit) {
+        Node root = new Node(initial_board, null, '#');   //create root (direction = '#')
+        if (matchesGoal(root)) {
+            success(root);
+            return; //if found, succeed, & end game
         }
+        DLS_visit(root, limit);
+    }
 
+    public void DLS_visit(Node u, int limit) {
+        frontier.add(u);
+        //Functions.printNodeList(">frontier", frontier);
+
+        if (matchesGoal(u)) {
+            success(u);
+            System.exit(0); //if found, succeed, & end game
+        }
+        if(u.getDepth() < limit) {
+            for (Node v : generateChildren(u)) {
+                System.out.println("LIMIT: " + limit);
+                if (!inExplored(v) && !inFrontier(v)) {  //white (prevents going back to the same node)
+                    DLS_visit(v, limit);
+                }
+            }
+        }
     }
 
     //generate all children of the parent
@@ -43,12 +69,31 @@ public class IDDFS{
         return children;
     }
 
+
+
+
     //print success messages
     public void success(Node solutionNode) {
         printMoves(solutionNode);
         printNumNodes(solutionNode);
         printTime();
         printMemory();
+    }
+
+    //return true if node is in frontier list (by comparing int[])
+    public boolean inFrontier(Node node) {
+        for (Node n : frontier) {
+            if (Arrays.equals(n.getBoard(), node.getBoard())) return true;
+        }
+        return false;
+    }
+
+    //return true if node is in explored list (by comparing int[])
+    public boolean inExplored(Node node) {
+        for (Node n : explored) {
+            if (Arrays.equals(n.getBoard(), node.getBoard())) return true;
+        }
+        return false;
     }
 
     //check if the board matches goal, if so, return true

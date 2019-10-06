@@ -6,6 +6,8 @@
  */
 
 
+import java.util.ArrayList;
+
 public class Functions {
 
     public static void printArray(String name, int[] array) {
@@ -28,6 +30,14 @@ public class Functions {
                 System.out.print("\t" + array[i]);
             }
         }
+    }
+
+    public static void printNodeList(String name, ArrayList<Node> arraylist){
+        System.out.print(name + " = [ ");
+        for (Node node : arraylist) {
+            System.out.print(node.getNodeID() + " ");
+        }
+        System.out.println("]");
     }
 
 }
