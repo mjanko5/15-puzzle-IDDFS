@@ -16,7 +16,7 @@ public class Main {
         int initialBoard[] = new int[]{1, 0, 2, 4, 5, 7, 3, 8, 9, 6, 11, 12, 13, 10, 14, 15
         };
 
-        //    ^^^ REPLACE INPUT HERE
+        //    ^^^ REPLACE INPUT HERE.
 
         new IDDFS(initialBoard); //run IDDFS
     }

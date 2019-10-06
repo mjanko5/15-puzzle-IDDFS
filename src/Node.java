@@ -34,7 +34,7 @@ public class Node {
             System.out.println("Creating a new node.\t\t" + direction + "\t\t" + depth + "\t\t" + nodeID + "\t\tNIL");
         }
         printBoard();
- */
+*/
 
     }
 

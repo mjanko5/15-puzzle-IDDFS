@@ -5,7 +5,7 @@
  * To God be the Glory
  */
 
-//IDDFS => "Iterative Deepening Depth First Search"
+//IDDFS => "Iterative Deepening Depth First Search".
 public class IDDFS{
 
     private double infinity = Double.POSITIVE_INFINITY;
