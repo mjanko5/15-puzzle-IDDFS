@@ -77,7 +77,7 @@ public class Node {
     public Node moveLeft() {
         int[] pattern = board.clone(); //new board
         if (pattern[0] == 0 || pattern[4] == 0 || pattern[8] == 0 || pattern[12] == 0) {
-            System.out.println("Cannot move left! Blank is in left column.");
+            //System.out.println("Cannot move left! Blank is in left column.");
             return null;
         } else { //move left
             int zeroPosition = get0Position(pattern);
@@ -91,7 +91,7 @@ public class Node {
     public Node moveRight() {
         int[] pattern = board.clone(); //new board
         if (pattern[3] == 0 || pattern[7] == 0 || pattern[11] == 0 || pattern[15] == 0) {
-            System.out.println("Cannot move right! Blank is in right column.");
+            //System.out.println("Cannot move right! Blank is in right column.");
             return null;
         } else { //move right
             int zeroPosition = get0Position(pattern);
@@ -105,7 +105,7 @@ public class Node {
     public Node moveUp() {
         int[] pattern = board.clone(); //new board
         if (pattern[0] == 0 || pattern[1] == 0 || pattern[2] == 0 || pattern[3] == 0) {
-            System.out.println("Cannot move up! Blank is in top row.");
+            //System.out.println("Cannot move up! Blank is in top row.");
             return null;
         } else { //move up
             int zeroPosition = get0Position(pattern);
@@ -119,7 +119,7 @@ public class Node {
     public Node moveDown() {
         int[] pattern = board.clone(); //new board
         if (pattern[12] == 0 || pattern[13] == 0 || pattern[14] == 0 || pattern[15] == 0) {
-            System.out.println("Cannot move down! Blank is in bottom row.");
+            //System.out.println("Cannot move down! Blank is in bottom row.");
             return null;
         } else { //move down
             int zeroPosition = get0Position(pattern);

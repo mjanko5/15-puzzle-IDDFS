@@ -12,7 +12,7 @@ import java.util.Arrays;
 public class DLS {
 
     private int goal[] = new int[]{1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 0};
-    private ArrayList<Node> frontier = new ArrayList<>();  //gray nodes
+    private ArrayList<Node> explored = new ArrayList<>();  //gray nodes
     public static int nodeCount = 0; //total number of nodes created in this DLS run
 
     //DLS -> Creates a node and calls DLS_visit()
@@ -22,10 +22,10 @@ public class DLS {
     }
 
     //DLS_visit -> recursive function that "deepens" into the search tree:
-    //Adds into frontier, checks for goal, and if not at limit, generates children which recurse
+    //Adds into explored, checks for goal, and if not at limit, generates children which recurse
     public void DLS_visit(Node u, int limit) {
-        frontier.add(u);
-        //Functions.printNodeList(">frontier", frontier);
+        explored.add(u);
+        //Functions.printNodeList(">explored", explored);
 
         if (matchesGoal(u)) {
             success(u);
@@ -33,7 +33,7 @@ public class DLS {
         }
         if (u.getDepth() < limit) {
             for (Node v : generateChildren(u)) {
-                if (!inFrontier(v)) {       //prevents going back to the same node
+                if (!inExplored(v)) {       //prevents going back to the same node
                     DLS_visit(v, limit);    //run recursive DLS on children nodes
                 }
             }
@@ -68,9 +68,9 @@ public class DLS {
         printMemory();
     }
 
-    //return true if node is in frontier list (by comparing int[])
-    public boolean inFrontier(Node node) {
-        for (Node n : frontier) {
+    //return true if node is in explored list (by comparing int[])
+    public boolean inExplored(Node node) {
+        for (Node n : explored) {
             if (Arrays.equals(n.getBoard(), node.getBoard())) return true;
         }
         return false;

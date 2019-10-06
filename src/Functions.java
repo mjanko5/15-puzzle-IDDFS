@@ -32,6 +32,7 @@ public class Functions {
         }
     }
 
+    //Example: print Frontier list
     public static void printNodeList(String name, ArrayList<Node> arraylist) {
         System.out.print(name + " = [ ");
         for (Node node : arraylist) {
