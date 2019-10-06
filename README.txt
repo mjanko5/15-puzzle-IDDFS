@@ -12,5 +12,5 @@ Platform coded: INTELLIJ
 ZIP Folder contains 5 files: Main.java, IDDFS.java, DLS.java, Node.java, README.txt
 
 
-TO RUN: 1) Input initial sequence into Main.java file (separated by commas)
-	    2) Run Main.java file in IDE
+TO RUN: 1) Input initial sequence into Main.java file (separated by commas).
+	    2) Run Main.java file in IDE.
